@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+//클로저를 사용한 private 멤버변수
+function makeProperty(o, name, predicate){
+	var value; //private 변수
+	//getter 메소드
+	o['get' + name] = function(){
+		return value;
+	};
+	
+	//setter 메소드
+	o['set' + name] = function(v){
+		if(predicate && !predicate(v))
+			throw 'set' + name + ' : invalid value ' + v;
+		else
+			value = v;
+	};
+}
+var o = {};
+//Name Property 추가, set은 string만 가능
+makeProperty(o, 'Name', function(x){
+	return typeof x == 'string';
+});
+o.setName('Juhee');
+console.log(o.getName());
+</script>
+</head>
+<body>
+		
+</body>
+</html>

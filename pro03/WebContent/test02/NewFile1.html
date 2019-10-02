@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var from = [1, 3, 5, 7, 9];
+var to = [1, 2, 3, 4, 5];
+function copyUndefineProperties(from, to){
+	for(p in from){
+		//console.log(from[p]);
+		if(!(from[p] in to))
+			to.push(from[p]);
+			//to[p].length = from[p];
+	}
+		return to;
+}
+alert(copyUndefineProperties(from, to));
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

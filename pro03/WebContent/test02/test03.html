@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+var object = Object.create({}, {
+	name : {value : '김길동', enumerable : true},
+	region : {value : '서울', enumerable : true}
+	
+});
+console.log(Object.keys(object));
+console.log(Object.values(object));
+
+var person = Object.create(object, {
+	gender : {value : '남자', enumerable : true},
+	hobby : {value : '기타', enumerable : true}
+})
+
+console.log(object);
+for(i in person){
+	console.log(i);
+}
+console.log(person);
+console.log(Object.getPrototypeOf(person));
+console.log(Object.getPrototypeOf(object));
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

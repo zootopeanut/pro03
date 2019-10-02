@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function Rectangle(w, h){
+	this.width = w;
+	this.height = h;
+}
+Rectangle.prototype.area = function(){
+	return this.width * this.height;
+}
+var r = Rectangle(8, 11);
+var a = r.area();
+alert(a);
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

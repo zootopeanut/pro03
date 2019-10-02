@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>구구단 조회하기</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+function gugu(){
+	var dan = $("#dan").val();
+	console.log("dan : " + dan);
+	document.write("<h1 align = center>" + dan + "단 구구단</h1>");
+	document.write("<table border = 1 align = center><tr><td bgcolor = 'yellow' width = 50px align = center>X</td>");
+
+	for (var i = 1; i <= dan; i++) {
+		document.write("<td bgcolor = 'pink' width = 50px align = center>" + i + "</td>");
+	}
+	document.write("</tr>");
+
+	for (var j = 1; j < 10; j++) {
+		document.write("<tr><td bgcolor = 'pink' width = 50px align = center>" + j + "</td>");
+		for (var k = 1; k <= dan; k++){
+			document.write("<td width = 50px align = center>" + j*k + "</td>");
+		}
+		document.write("</tr>");
+	}
+	document.write("</table>");
+}
+</script>
+</head>
+<body>
+몇 단을 만들까요? 
+<input type = "text" id = "dan" size = "10">
+<input type = "button" value = "구구단 만들기" onClick = "gugu()">
+</body>
+</html>
