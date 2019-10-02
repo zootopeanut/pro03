@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function Stack(){
+	var arr = [];
+
+	this.push = function(data){
+		arr.push(data);
+	}
+	this.pop = function(){
+		return arr.pop();
+	}
+	this.peek = function(){
+		return arr[arr.length-1];
+	}
+	this.print = function(){
+		return arr.toString();
+	}
+}
+
+var source = new Stack();
+source.push(3);
+source.push(2);
+source.push(1);
+
+var dest = new Stack();
+var helper = new Stack();
+
+function hanoi(n, source, dest, helper){    
+	if(n === 1) {
+		dest.push(source.pop());
+    	console.log(n + "을" + source.print() + " 에서" + dest.print() + "로 이동");	
+    }
+    else {
+        hanoi(n-1, source, dest, helper);  
+        dest.push(source.pop());
+        console.log(n + " 을" + source.print() + " 에서 " + dest.print() + "로 이동");
+        hanoi(n-1, helper, source, dest);
+    }
+}
+
+hanoi(3, source, dest, helper);
+
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+
+</body>
+</html>

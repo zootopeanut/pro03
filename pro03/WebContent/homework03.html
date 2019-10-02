@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+
+   function Node(data, left, right) {
+      this.data = data;
+      this.left = left;
+      this.right = right;
+   }
+
+ 
+   function BSTree() {
+
+      this.root = null;
+
+      this.insert = insert;
+
+      this.inOrderSearch = inOrderSearch;
+
+      this.preOrderSearch=preOrderSearch;
+      
+      this.postOrderSearch=postOrderSearch;
+      
+      this.min = findMin;
+
+      this.max = findMax;
+
+   }
+
+    
+   function inOrderSearch(printNode){
+      inOrder(this.root);
+      //printNode();
+   }
+   
+   function preOrderSearch(printNode){
+      preOrder(this.root);
+   }
+   
+   function postOrderSearch(printNode){
+      postOrder(this.root);
+   }
+   
+   function insert(data) {
+
+      var node = new Node(data, null, null);
+
+      if (this.root == null) {
+
+         this.root = node;
+
+      } else {
+
+         var current = this.root;
+
+         var parent;
+
+         while (true) {
+
+            parent = current;
+
+            if (data < current.data) {
+
+               current = current.left;
+
+               if (current == null) {
+
+                  parent.left = node;
+
+                  break;
+               }
+
+            } else {
+
+               current = current.right;
+
+               if (current == null) {
+
+                  parent.right = node;
+
+                  break;
+
+               }
+            }
+         }
+      }
+   }
+
+ 
+   //중위
+   function inOrder(node) {
+
+      if (node != null) {
+
+         inOrderSearch(node.left);
+         console.log(node.show() + " ");
+         inOrderSearch(node.right);
+
+      }
+   }
+
+ 
+   //전위
+   function preOrder(node) {
+
+      if (node != null) {
+
+         console.log(node.show() + " ");
+
+         preOrderSearch(node.left);
+
+         preOrderSearch(node.right);
+
+      }
+   }
+ 
+
+   //후위
+   function postOrder(node) {
+
+      if (node != null) {
+
+         postOrderSearch(node.left);
+
+         postOrderSearch(node.right);
+
+         console.log(node.show() + " ");
+
+      }
+   }
+
+
+   //최소값
+   function findMin() {
+
+      var current = this.root;
+
+      while (!(current.left == null)) {
+
+         current = current.left;
+
+      }
+
+      return current.data;
+   }
+
+   //최대값
+   function findMax() {
+
+      var current = this.root;
+
+      while (!(current.right == null)) {
+
+         current = current.right;
+
+      }
+
+      return current.data;
+   }
+
+ 
+
+   var tree = new BSTree();
+
+   tree.insert(11);
+
+   tree.insert(7);
+
+   tree.insert(15);
+
+   tree.insert(5);
+
+   tree.insert(3);
+
+   tree.insert(9);
+
+   tree.insert(8);
+
+   tree.insert(10);
+
+   
+   function printNode(value){
+       console.log(value);
+   }
+   
+   
+
+   console.log('*** 중위 순회 ***');
+   console.log(printNode)
+   tree.inOrderSearch(printNode);
+
+   console.log('*** 전위 순회 ***');
+   tree.preOrderSearch(printNode);
+
+   console.log('*** 후위 순회 ***');
+   tree.postOrderSearch(printNode);
+
+   console.log('********* 최대/최소값 ***********');
+   console.log(tree.max());  
+   console.log(tree.min());
+   
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

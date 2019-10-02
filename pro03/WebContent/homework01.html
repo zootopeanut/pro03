@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>동적 추가 메뉴</title>
+<style>
+   div {
+      width : 420px;
+        height : 350px;
+        border : 1px solid #ccc;
+   }
+   
+   li {
+      width : 420px;
+      border : 0.5px solid #ccc;
+      list-style : none;
+      text-align : center;
+   }
+   
+   .click {
+      background : #EAEAEA;
+      color : white;
+   }
+   
+</style>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+   $(document).ready(function(){   
+      
+      function isEmpty(input){
+         if(input===''){
+            alert('값을 입력해주세요');
+            return true;
+         }else{
+            return false;
+         }
+      }
+      
+      //li 클릭 시 색상 변화
+      $(document).on("click", "li", function(){
+         if($(this).is('.click')){
+            $(this).removeClass("click");
+            $("#input").val('');
+         }else{
+            $(this).addClass("click");
+            $("#input").val($(this).text());
+         }
+      });
+
+      //추가버튼 클릭 시      
+      $("#add").click(function(){
+         var input = $("#input").val(); //input 값 받아옴
+         if(!isEmpty(input)){            
+            $("div").append("<li>" + input + "</li>"); //div에 넣기            
+         }
+         $("#input").val('');
+      });
+            
+      //삭제버튼 클릭 시
+      $("#del").click(function(){
+         $("li").remove(".click");
+         $("#input").val('');
+      });   
+      
+      //수정버튼 클릭 시
+      $("#mod").click(function(){ 
+         var input = $("#input").val(); //input 값 받아옴
+         if(!isEmpty(input)){         
+            $("li.click").html(input);
+         }
+         $("#input").val('');
+      });
+      
+      //UP버튼 클릭 시
+      $("#up").click(function(){
+         var check = $("li.click");
+         for(var i=0;i<check.length;i++){
+            $(check[i]).insertBefore($(check[i]).prev())
+         }
+      });
+      
+      //DOWN버튼 클릭 시      
+      $("#down").click(function(){
+         var check = $("li.click");
+         for(var i=check.length-1;i>=0;i--){
+            $(check[i]).insertAfter($(check[i]).next());
+         }
+      });
+   });   
+</script>
+</head>
+<body>
+   
+   <input type = "text" id = "input">
+   
+   <button id = "add">추가</button>
+   <button id = "mod">수정</button>
+   <button id = "del">삭제</button>
+   <button id = "up">UP</button>
+   <button id = "down">DOWN</button>
+   
+   <br><br>
+
+   
+   <div></div>
+   
+</body>
+</html>

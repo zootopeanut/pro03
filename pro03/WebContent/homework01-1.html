@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>동적 추가 메뉴</title>
+<style>
+	div {
+		width : 420px;
+        height : 350px;
+        border : 1px solid #ccc;
+	}
+	
+	li {
+		width : 420px;
+		border : 0.5px solid #ccc;
+		list-style : none;
+		text-align : center;
+	}
+	
+	.click {
+		background : #EAEAEA;
+		color : white;
+	}
+</style>
+<script>
+	window.onload=function(){
+		clickEvent();
+		addEvent();
+		delEvent();
+		modEvent();
+		upEvent();
+		downEvent();
+	}
+	
+	function isEmpty(input){
+		if(input===''){
+			alert('값을 입력해주세요');
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	function clickEvent(){
+		document.getElementsByTagName('body')[0].addEventListener('click',function(){
+			if(event.target.nodeName=='LI'){
+				var getClass=event.target.getAttribute('class');
+				if(getClass==null){
+					event.target.setAttribute('class','click');
+					document.getElementById('input')['value']=event.target.innerHTML;
+				}else{
+					event.target.removeAttribute('class','click');
+					document.getElementById('input')['value']='';
+				}
+			}
+		});
+	}
+	
+	//추가버튼 클릭 시
+	function addEvent(){
+		document.getElementById('add').addEventListener('click',function(){
+			var input=document.getElementById('input')['value'];
+			if(!isEmpty(input)){
+				var li=document.createElement("li");
+				li.innerHTML=input;
+				document.getElementById('content').appendChild(li);
+				document.getElementById('input')['value']='';
+			}
+		});
+	}
+	
+	//삭제버튼 클릭 시
+	function delEvent(){
+		document.getElementById('del').addEventListener('click',function(){
+			var checkList=document.querySelectorAll('li.click');
+			for(var i=0;i<checkList.length;i++){
+				checkList[i].parentNode.removeChild(checkList[i]);
+			}
+			document.getElementById('input')['value']='';
+		});
+	}
+	
+	//수정버튼 클릭 시
+	function modEvent(){
+		document.getElementById('mod').addEventListener('click',function(){
+			var input=document.getElementById('input')['value'];
+			if(!isEmpty(input)){
+				var checkList=document.querySelectorAll('li.click');
+				for(var i=0;i<checkList.length;i++){
+					checkList[i].innerHTML=input;
+				}
+				document.getElementById('input')['value']='';
+			}
+		});
+	}
+	
+	//UP버튼 클릭 시
+	function upEvent(){
+		document.getElementById('up').addEventListener('click',function(){	
+			var checkList=document.querySelectorAll('li.click');
+			for(var i=0;i<checkList.length;i++){
+				checkList[i].parentNode.insertBefore(checkList[i],checkList[i].previousSibling);
+			}
+		});
+	}
+	
+	//DOWN버튼 클릭 시
+	function downEvent(){
+		document.getElementById('down').addEventListener('click',function(){	
+			var checkList=document.querySelectorAll('li.click');
+			for(var i=checkList.length-1;i>=0;i--){
+				if(checkList[i].nextSibling!=null){			
+					checkList[i].parentNode.insertBefore(checkList[i],checkList[i].nextSibling.nextSibling);
+				}else{
+					checkList[i].parentNode.prepend(checkList[i]);
+				}
+			}
+		});
+	}
+	
+</script>
+</head>
+<body>
+	<h1>Javascript ver.</h1>
+	<input type = "text" id = "input">
+	
+	<button id = "add">추가</button>
+	<button id = "mod">수정</button>
+	<button id = "del">삭제</button>
+	<button id = "up">UP</button>
+	<button id = "down">DOWN</button>
+	
+	<br><br>
+
+	<div id = "content"></div>
+	
+</body>
+</html>
+
+

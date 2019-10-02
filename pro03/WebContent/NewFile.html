@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<script>
+	function Stack(){
+		this.arr = [];
+		this.push = function(data){
+			this.arr.push(data);
+		}
+		this.pop = function(){
+			return this.arr.pop();
+		}		
+	}
+	var source = new Stack();
+	source.name = "source";
+	source.push(3);
+	source.push(2);
+	source.push(1);
+
+	var dest = new Stack();
+	dest.name = "dest"; //helper
+	var helper = new Stack();
+	helper.name = "helper"; //dest
+	
+	function hanoi(n, source, helper, dest){
+		if(n === 1){
+			console.log(n+"을 "+ source.name + " 에서 "+ dest.name + " 으로 이동");
+			dest.push(source.pop());
+		}
+		else{
+	        hanoi(n-1, source, dest, helper);
+	        console.log(n + '을  '+ source.name +' 에서 ' + dest.name + ' 으로 이동');
+	        dest.push(source.pop());
+	        hanoi(n-1, helper, source, dest);
+	    }
+	}
+	hanoi(3, source, helper, dest);
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

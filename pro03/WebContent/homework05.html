@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<style>
+body{
+background-color:#FFFFFF;
+color:#333333;
+font-family:"굴림","Verdana";
+font-size:10pt;
+line-height:150%;
+}
+table{
+color:#333333;
+font-family:"굴림","Verdana";
+font-size:10pt;
+line-height:150%;
+}
+
+A:link{font-size:10pt;font-family:굴림;color:#565656;text-decoration:none;}
+A:visited{font-size:10pt;font-family:굴림;color:#565656;text-decoration:none;}
+A:active{font-size:10pt;font-family:굴림;color:#FF6000;text-decoration:none;}
+A:hover{font-size:10pt;font-family:굴림;color:#FF6000;text-decoration:none;}
+</style>
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+//자식을 묶은 속성을 ul로 리턴?
+//ul노드로 리턴?? li노드로 리턴?
+ 
+ function parsing(data){
+   var child=data['child'];
+
+   var ul=document.createElement('ul');
+    for(var i in child){
+      var li=document.createElement('li');
+      var a=document.createElement('a');
+      a.innerHTML=child[i].name;
+      a.setAttribute('href',child[i].href);
+      li.setAttribute('style','list-style-type : '+child[i].icon);
+      li.appendChild(a);
+      ul.appendChild(li);
+      if(child[i].child.length!=0){
+         parsing(child[i]);
+      }
+    }
+   console.log(ul);
+ }
+
+function CreateTree(input){
+   this.data_init = function(data){
+     parsing(data)
+   };
+   this.createView = function(){      
+      var body=document.getElementsByTagName('body')[0];
+      body.appendChild(input);   
+   }
+}
+
+   var data = {
+         name:'name',
+         href:'',
+         target:'target',
+         icon:'',
+         child:[]
+   };
+   var childA = {
+         name:'관리자메뉴',
+         href:'',
+         target:'targer',
+         icon:'homework/image/menu03.gif',
+         child:[]
+   };
+   var childB = {
+         name:'직원메뉴',
+         href:'',
+         target:'targer',
+         icon:'homework/image/menu03.gif',
+         child:[]
+   };
+   var childC = {
+         name:'관리자메뉴',
+         href:'',
+         target:'targer',
+         icon:'homework/image/menu03.gif',
+         child:[]
+   };
+
+   var childA1 = {name:'부하직원조회',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+   var childA2 = {name:'결제승인',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+   var childA3 = {name:'결제내역조회',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+      
+   var childB1 = {name:'결제신청',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+   var childB2 = {name:'급여정보조회',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+   var childB3 = {name:'인사정보조회',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+   
+   var childC1 = {name:'기준관리',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+   var childC2 = {name:'근무현황조회',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+   var childC3 = {name:'평가현황조회',href:'w3.school.com',target:'_blank',icon:'homework/image/menu02.gif',child:[]};
+
+function init(){
+      console.log("init호출")
+      var tree = new CreateTree(document.getElementById('div'));
+      
+      data.child.push(childA);
+      data.child.push(childB);
+      data.child.push(childC);
+      console.log(data);
+      
+      childA.child.push(childA1);
+      childA.child.push(childA2);
+      childA.child.push(childA3);
+      console.log(childA);
+      
+      childB.child.push(childB1);
+      childB.child.push(childB2);
+      childB.child.push(childB3);
+      console.log(childB);
+      
+      childC.child.push(childC1);
+      childC.child.push(childC2);
+      childC.child.push(childC3);
+      console.log(childC);
+      console.log("--------------------")
+      tree.data_init(data);
+      
+      tree.createView();
+   }
+   
+
+</script>
+</head>
+<body onload="init()">
+<div id="div"></div>
+</body>
+</html>
